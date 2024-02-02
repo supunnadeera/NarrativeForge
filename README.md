@@ -24,6 +24,8 @@ export OPENAI_API_KEY="your-api-key-here"
 
 Make sure to replace "your-api-key-here" with your actual OpenAI API key.
 
+You need to install [ImageMagick](https://imagemagick.org/script/download.php), make sure to add imagemagick path to the moviepy configfile if you are on windows.
+
 ## Usage
 
 use in command line as
@@ -31,6 +33,8 @@ use in command line as
 ```bash
 NarrativeForge -i "input.mp4" -t "Hello, World!, Enhance your videos with NarrativeForge"
 ```
+
+or on a python file as
 
 ```python
 from NarrativeForge import TextToVideo
@@ -45,7 +49,7 @@ output_filename = "output_video.mp4"
 
 # Generate the enhanced video
 text_to_video_instance.generate_video(
-    input_filename, texts, output_filename, caption_padding=100
+    input_filename, texts, output_filename=output_filename, caption_padding=100
 )
 
 ```
