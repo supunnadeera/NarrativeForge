@@ -1,0 +1,4 @@
+NarrativeForge.egg-info/
+dist/
+build/
+.env/
