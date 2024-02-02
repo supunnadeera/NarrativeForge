@@ -1,4 +1,5 @@
 import os
+import click
 from moviepy.editor import VideoFileClip, CompositeVideoClip, TextClip, AudioFileClip
 from .text_to_speech import text_to_speech_instance
 from NarrativeForge.speech_to_text import speech_to_text_instance
@@ -48,6 +49,7 @@ class TextToVideo:
     def show_available_colors(self):
         print(TextClip.list("color"))
 
+
     def generate_video(
         self,
         input_filename,
@@ -69,8 +71,11 @@ class TextToVideo:
         - text_clip_params (Optional[Dict[str, any]]): Additional parameters for MoviePy TextClip.
         Returns:
         - None
+
+
+
         """
-        text_to_speech_instance.generate_speech(texts, self.audio_file, voice=voice)
+        text_to_speech_instance.generate_speech(texts, self.audio_file, voice)
         segmented_texts = speech_to_text_instance.generate_text(self.audio_file)
         clip_duration = segmented_texts[-1]["end"]
 
@@ -90,3 +95,16 @@ class TextToVideo:
 
 
 text_to_video_instance = TextToVideo()
+@click.command()
+@click.option("--input-file", "-i", help="Input video file", required=True)
+@click.option("--texts", "-t", help="Texts to be added to the video", required=True)
+@click.option("--voice", default="shimmer", help="The voice to use for speech generation")
+@click.option("--output-filename", default="output.mp4", help="Path for the output video file")
+@click.option("--caption-padding", default=100, help="Padding for the captions")
+def main(input_file, texts, voice, output_filename, caption_padding):
+    text_to_video_instance.generate_video(input_file, texts, voice, output_filename, caption_padding)
+
+
+
+if __name__ == "__main__":
+    main()

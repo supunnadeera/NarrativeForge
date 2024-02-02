@@ -26,6 +26,12 @@ Make sure to replace "your-api-key-here" with your actual OpenAI API key.
 
 ## Usage
 
+use in command line as
+
+```bash
+NarrativeForge -i "input.mp4" -t "Hello, World!, Enhance your videos with NarrativeForge"
+```
+
 ```python
 from NarrativeForge import TextToVideo
 
